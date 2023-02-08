@@ -5,7 +5,7 @@ namespace Estimate.PlatformServices.Contracts
 {
     public class MemberLettersresponse
     {
-        Letter[] letter
+        Letter[] letter;
     }
 
 }
