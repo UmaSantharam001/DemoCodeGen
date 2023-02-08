@@ -1,0 +1,29 @@
+name: dotnet
+on:
+  push:
+    branches:
+      - main
+env:
+  REPOSITORY: dotnet
+  DOCKER_FILE_PATH: Dockerfile
+  DOCKER_BUILD_CONTEXT: .
+  CONTAINER_NAME: dotnet-${{ github.run_number }}
+  
+jobs:
+  build-and-test:
+    runs-on: ubuntu
+    steps:
+      - name: Check Out Repo
+        uses: actions/checkout@v2
+      - name: Login to Azure Container Registry
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.AZURE_CONTAINER_REGISTRY }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+      - name: Build and push an image to container registry
+        run: |
+          docker build -f ${{ env.DOCKER_FILE_PATH }} ${{ env.DOCKER_BUILD_CONTEXT }} -t ${{ secrets.AZURE_CONTAINER_REGISTRY }}/${{ env.REPOSITORY}}:${GITHUB_REF##*/}-${{ github.run_number }}
+          docker push ${{ secrets.AZURE_CONTAINER_REGISTRY }}/${{ env.REPOSITORY}}:${GITHUB_REF##*/}-${{ github.run_number }}
+      - name: Run Docker image
+        run: docker run --name ${{ env.CONTAINER_NAME }} -d ${{ secrets.AZURE_CONTAINER_REGISTRY }}/${{ env.REPOSITORY}}:${GITHUB_REF##*/}-${{ github.run_number }}
