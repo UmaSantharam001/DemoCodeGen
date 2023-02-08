@@ -39,7 +39,7 @@ namespace Estimate.BusinessServices
         }
 
         public IEnumerable<Letter> Member_GetMemberById_BL(string nameId, int channelid){
-          var data = _gateway.GetData<ApiResponse, ApiResponse>($"https://mockapirg.azurewebsites.net/members/1");
+          var data = _gateway.GetData<ApiResponse, ApiResponse>($"https://mockserviceapp.azurewebsites.net/members/1");
           var letterId = data.data.letters[0].toDoId;
           var result = _correspondenceloggetbynameidRepository.CorrespondenceLogGetByNameIdByNameId_GET_Data(nameId, "", "", 0);
           return result;
