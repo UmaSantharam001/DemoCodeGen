@@ -1,0 +1,4 @@
+namespace Estimate.Data.Constants
+{
+
+}
