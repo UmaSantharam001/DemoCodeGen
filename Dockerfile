@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
 WORKDIR /App
 COPY ["Code/Estimate.PlatformServices/Estimate.PlatformServices.csproj", "Code/Estimate.PlatformServices/"]
 COPY ["Code/Estimate.PlatformServices.Contracts/Estimate.PlatformServices.Contracts.csproj", "Code/Estimate.PlatformServices.Contracts/"]
