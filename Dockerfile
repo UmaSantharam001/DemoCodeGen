@@ -13,7 +13,7 @@ COPY ["Tests/Estimate.Test.ServiceGateway/Estimate.Test.ServiceGateway.csproj", 
 COPY ["Tests/Estimate.Test.Framework/Estimate.Test.Framework.csproj", "Tests/Estimate.Test.Framework/"]
 RUN dotnet restore "Code/Estimate.PlatformServices/Estimate.PlatformServices.csproj"
 
-RUN dotnet publish "Estimate.PlatformServices.csproj" -c Release -o out
+RUN dotnet publish "Code/Estimate.PlatformServices/Estimate.PlatformServices.csproj" -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /App
